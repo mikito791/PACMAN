@@ -13,7 +13,7 @@ void Stage::Initialize()
 	assert(hFloor_ >= 0);
 	hWall_ = Model::Load("Model\\Wall.fbx");
 	assert(hWall_ >= 0);
-	Camera::SetPosition(XMFLOAT3(6.5, 10, -5));
+	Camera::SetPosition(XMFLOAT3(6.5, 10, -6));
 	Camera::SetTarget(XMFLOAT3( 6.5,0,5.5 ));
 
 }
@@ -30,14 +30,14 @@ void Stage::Draw()
 		for (float x = 0; x < 15; x++)
 		{
 			floorTrans.position_ = { x,0,z };
-	        Model::SetTransform(hFloor_, floorTrans);
-	        Model::Draw(hFloor_);
+	        //Model::SetTransform(hFloor_, floorTrans);
+	        //Model::Draw(hFloor_);
 			Model::SetTransform(hWall_, floorTrans);
 			Model::Draw(hWall_);
 		}
-	}
-	
-	
+	}	
+
+
 }
 
 void Stage::Release()
