@@ -1,17 +1,12 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include<vector>
-using std::vector;
-class Stage :
+class Player :
     public GameObject
 {
-	int hFloor_;
-	int hWall_;
-	vector<vector<int>>stageData;
+    int hModel_;
+	float speed_;
 public:
-	//コンストラクタ
-	//引数：parent  親オブジェクト（SceneManager）
-	Stage(GameObject* parent);
+	Player(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
