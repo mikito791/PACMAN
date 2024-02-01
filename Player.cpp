@@ -3,6 +3,8 @@
 #include"Engine/Model.h"
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
+#include"Engine/Debug.h"
+
 namespace {
 	const float PLAYER_MOVE_SPEED{ 1.0f };
 }
@@ -36,7 +38,7 @@ void Player::Update()
 	{
 		//transform_.rotate_.y = -90;
 		//transform_.position_.x -= 0.1f;
-		
+		 
 		//moveDir = Dir::LEFT;
 		move = XMVECTOR{ -1,0,0,0 };
 	}
@@ -61,8 +63,7 @@ void Player::Update()
 		move = XMVECTOR{ 0,0,-1,0 };
 		//moveDir = Dir::DOWN;
 	}
-
-	//キャラの移動で必要↓
+	//キャラの移動で必要↓//キャラの向きcosθで求める
 	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 	XMVECTOR posTmp = XMVectorZero();
 	//posTmp.x posTmp.z => int tx,ty :配列のインデックス
