@@ -3,9 +3,9 @@
 #include"Engine/CsvReader.h"
 #include"Engine/Camera.h"
 namespace {
-	const int STAGE_X{ 15 };
-	const int STAGE_Y{ 15 };
-	const int stageData[STAGE_Y][STAGE_X]{
+	/*const int stageWidth_{ 15 };
+	const int stageHeight_{ 15 };
+	const int stageData[stageHeight_][stageWidth_]{
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
 		{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 		{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
@@ -21,9 +21,16 @@ namespace {
 		{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 		{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	};
+	};*/
+}
 
+bool Stage::IsWall(int _x, int _y)
+{
 
+	if (stageData[_y][_x]==STAGE_OBJ::WALL)
+		return true;
+	else
+		return false;
 }
 
 Stage::Stage(GameObject* parent)
@@ -31,18 +38,21 @@ Stage::Stage(GameObject* parent)
 {
 	CsvReader csv;
 	csv.Load("Model\\map.csv");
-	int STAGE_X = csv.GetWidth();
-	int STAGE_Y = csv.GetHeight();
+	//ステージ
+	stageWidth_ = csv.GetWidth();
+	stageHeight_ = csv.GetHeight();
+	//ステージの幅と高さ→メンバ変数に代入
 	
-	for (int i = 0; i < STAGE_Y; i++)
+	
+	for (int i = 0; i < stageHeight_; i++)
 	{
-		vector<int> sdata(STAGE_X, 0);
+		vector<int> sdata(stageWidth_, 0);//stageWidth_個の配列を0で初期化
 		stageData.push_back(sdata);
 	}
 	//vector<vector<int>> stageData(h, vector<int>(w, 0));
-	for (int j = 0; j < STAGE_Y; j++)
+	for (int j = 0; j < stageHeight_; j++)
 	{
-		for (int i = 0; i < STAGE_X; i++)
+		for (int i = 0; i < stageWidth_; i++)
 		{
 			stageData[j][i] = csv.GetValue(i, j);
 		}
@@ -93,4 +103,10 @@ void Stage::Draw()
 
 void Stage::Release()
 {
+	//配列の掃除
+	for (int i = 0; i < stageHeight_; i++)
+	{
+		stageData[i].clear();
+	}
+	stageData.clear();
 }
