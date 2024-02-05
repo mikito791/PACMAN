@@ -34,7 +34,7 @@ void Player::Update()
 	XMVECTOR vFront = { 0,0,1,0 };
 	XMVECTOR move{ 0,0,0,0 };//移動初期化
 
-	if (Input::IsKeyDown(DIK_LEFT))
+	if (Input::IsKey(DIK_LEFT))
 	{
 		//transform_.rotate_.y = -90;
 		//transform_.position_.x -= 0.1f;
@@ -42,21 +42,21 @@ void Player::Update()
 		//moveDir = Dir::LEFT;
 		move = XMVECTOR{ -1,0,0,0 };
 	}
-	if (Input::IsKeyDown(DIK_RIGHT))
+	if (Input::IsKey(DIK_RIGHT))
 	{
 		//transform_.rotate_.y = 90;
 		//transform_.position_.x += 0.1f;
 		move = XMVECTOR{ 1,0,0,0 };
 		//moveDir = Dir::RIGHT;
 	}
-	if (Input::IsKeyDown(DIK_UP))
+	if (Input::IsKey(DIK_UP))
 	{
 		//transform_.rotate_.y = 0;
 		//transform_.position_.z += 0.1f;
 		move = XMVECTOR{ 0,0,1,0 };
 		//moveDir = Dir::UP;
 	}
-	if (Input::IsKeyDown(DIK_DOWN))
+	if (Input::IsKey(DIK_DOWN))
 	{
 		//transform_.rotate_.y = -180;
 		//transform_.position_.z -= 0.1f;
@@ -68,12 +68,12 @@ void Player::Update()
 	XMVECTOR posTmp = XMVectorZero();
 	//posTmp.x posTmp.z => int tx,ty :配列のインデックス
 	//仮にmapの配列をmap[][]とする
-	pos = pos + speed_ * move;
+	//pos = pos + speed_ * move;
 	posTmp = pos + speed_ * move;
-	int tx,ty;
-	tx = (int)(XMVectorGetX(pos)+0.5);
-	ty = pStage_->GetStageWidth()-(int)(XMVectorGetX(pos)+0.5);
-	if (!(pStage_->IsWall(tx,ty)))
+	int tx, ty;
+	tx = (int)(XMVectorGetX(posTmp) + 1.0f);
+	ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(posTmp) + 1.0f);
+	if (!(pStage_->IsWall(tx, ty)))
 	{
 		pos = posTmp;
 	}
