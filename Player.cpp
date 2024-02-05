@@ -70,12 +70,6 @@ void Player::Update()
 	//‰¼‚Émap‚Ì”z—ñ‚ðmap[][]‚Æ‚·‚é
 	pos = pos + speed_ * move;
 	posTmp = pos + speed_ * move;
-	
-	/*Debug::Log("(X,Z)=");
-	Debug::Log(XMVectorGetX(pos));
-	Debug::Log(",");
-	Debug::Log(XMVectorGetZ(pos), true);*/
-
 	int tx,ty;
 	tx = (int)(XMVectorGetX(pos)+0.5);
 	ty = pStage_->GetStageWidth()-(int)(XMVectorGetX(pos)+0.5);
