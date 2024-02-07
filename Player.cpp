@@ -1,5 +1,6 @@
 #include "Player.h"
 #include"Stage.h"
+#include"Gauge.h"
 #include"Engine/Model.h"
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
@@ -10,7 +11,8 @@ namespace {
 }
 Player::Player(GameObject* parent)
 	:GameObject(parent,"Player"),
-	hModel_(-1),speed_(PLAYER_MOVE_SPEED),pStage_(nullptr)
+	hModel_(-1),speed_(PLAYER_MOVE_SPEED),pStage_(nullptr),
+	pGauge_(nullptr), hpCrr_(100), hpMax_(100)
 {
 }
 
@@ -21,6 +23,7 @@ void Player::Initialize()
 	transform_.position_.x = 0.5;
 	transform_.position_.z = 1.5;
 	pStage_ = (Stage*)FindObject("Stage");
+	
 }
 
 void Player::Update()
@@ -31,7 +34,7 @@ void Player::Update()
 	//	LEFT,RIGHT,UP,DOWN,NONE
 	//};
 	//int moveDir = Dir::NONE;
-	XMVECTOR vFront = { 0,0,1,0 };
+	XMVECTOR vFront = { 0,0,1,0 };//å¸Ç´èâä˙âª
 	XMVECTOR move{ 0,0,0,0 };//à⁄ìÆèâä˙âª
 
 	if (Input::IsKey(DIK_LEFT))
@@ -77,6 +80,11 @@ void Player::Update()
 	{
 		pos = posTmp;
 	}
+	else
+	{
+		hpCrr_ = hpCrr_ - 2;
+		if(hpCrr_ < 0)hpCrr_ = 0;
+	}
 	//Debug::Log("(iX,iZ)=");
 	//Debug::Log(tx);
 	//Debug::Log(",");
@@ -87,7 +95,7 @@ void Player::Update()
 	if (!XMVector3Equal(move, XMVectorZero())) {
 		XMStoreFloat3(&(transform_.position_), pos);
 
-		XMVECTOR vdot = XMVector3Dot(vFront, move);
+		/*XMVECTOR vdot = XMVector3Dot(vFront, move);
 		assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
 		float angle = acos(XMVectorGetX(vdot));
 
@@ -95,12 +103,24 @@ void Player::Update()
 		if (XMVectorGetY(vCross) < 0)
 		{
 			angle *= -1;
-		}
-		transform_.rotate_.y = XMConvertToDegrees(angle);
+		}*/
+
+		XMMATRIX rot = XMMatrixRotationY(XM_PIDIV2);
+		XMVECTOR modifindVec = XMVector3TransformCoord(move, rot);
+	    /*Debug::Log(XMVectorGetX(modifindVec));
+		Debug::Log(",");
+		Debug::Log(XMVectorGetZ(modifindVec));*/
+
+		float angle = atan2(XMVectorGetZ(modifindVec), XMVectorGetX(modifindVec));
+		/*Debug::Log("=>");
+		Debug::Log(XMConvertToDegrees(angle),true);*/
+		transform_.rotate_.y = XMConvertToDegrees(-angle);
 	}
 	//ÉLÉÉÉâÇÃå¸Ç´
 	//float rotAngle[5]{ -90,90,0,180,180 };
 	//transform_.rotate_.y = rotAngle[moveDir];
+    Gauge *pGauge_ = (Gauge*)FindObject("Gamge");
+	pGauge_->SetGaugeVal(hpCrr_, hpMax_);
 }
 
 void Player::Draw()
