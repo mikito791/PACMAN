@@ -27,6 +27,9 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{e400702d-8f38-4f3d-b67b-74352438fa1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{28bed49e-2522-41e0-9b90-06f5218c12e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -105,8 +108,12 @@
     <ClCompile Include="Stage.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="Gauge.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -185,8 +192,12 @@
     <ClInclude Include="Stage.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Gauge.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
