@@ -27,6 +27,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{28bed49e-2522-41e0-9b90-06f5218c12e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -105,13 +108,8 @@
     <ClCompile Include="Stage.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Gauge.cpp">
-      <Filter>player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>player</Filter>
-    </ClCompile>
-    <ClCompile Include="food.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Gauge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -190,13 +188,8 @@
     <ClInclude Include="Stage.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Gauge.h">
-      <Filter>player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>player</Filter>
-    </ClInclude>
-    <ClInclude Include="food.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Gauge.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
