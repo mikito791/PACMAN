@@ -119,7 +119,7 @@ void Player::Update()
 	//ƒLƒƒƒ‰‚ÌŒü‚«
 	//float rotAngle[5]{ -90,90,0,180,180 };
 	//transform_.rotate_.y = rotAngle[moveDir];
-    Gauge *pGauge_ = (Gauge*)FindObject("Gamge");
+    Gauge *pGauge_ = (Gauge*)FindObject("Gauge");
 	pGauge_->SetGaugeVal(hpCrr_, hpMax_);
 }
 
