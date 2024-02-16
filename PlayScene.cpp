@@ -4,6 +4,7 @@
 #include"Gauge.h"
 #include"food.h"
 
+
 PlayScene::PlayScene(GameObject* parent)
 	:GameObject(parent,"PlayScene")
 {

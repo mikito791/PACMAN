@@ -5,6 +5,8 @@
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
 #include"Engine/Debug.h"
+#include"Engine/SphereCollider.h"
+#include"Engine/SceneManager.h"
 
 namespace {
 	const float PLAYER_MOVE_SPEED{ 1.0f };
@@ -23,6 +25,8 @@ void Player::Initialize()
 	transform_.position_.x = 0.5;
 	transform_.position_.z = 1.5;
 	pStage_ = (Stage*)FindObject("Stage");
+	SphereCollider* collider = new SphereCollider(XMFLOAT3(0, 0, 0), 1);
+	AddCollider(collider);
 	
 }
 
@@ -83,7 +87,11 @@ void Player::Update()
 	else
 	{
 		hpCrr_ = hpCrr_ - 2;
-		if(hpCrr_ < 0)hpCrr_ = 0;
+		if (hpCrr_ < 0) {
+			hpCrr_ = 0;
+			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+			pSceneManager->ChangeScene(SCENE_ID_CLEAR);
+		}
 	}
 	//Debug::Log("(iX,iZ)=");
 	//Debug::Log(tx);
@@ -133,4 +141,12 @@ void Player::Draw()
 
 void Player::Release()
 {
+}
+
+void Player::OnCollision(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "food")
+	{
+		pTarget->KillMe();
+	}
 }
